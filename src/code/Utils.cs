@@ -1464,7 +1464,7 @@ namespace Microsoft.PowerShell.SecretManagement
 
         private static Runspace _runspace;
 
-        public static Action<Runspace> CreateRunspace { get; set; }
+        public static Func<Runspace> CreateRunspace { get; set; }
 
         #endregion
 
@@ -1537,7 +1537,7 @@ namespace Microsoft.PowerShell.SecretManagement
 
             if (CreateRunspace != null)
             {
-                _runspace = CreateRunspace(_runspace);
+                _runspace = CreateRunspace();
             }
 
             using (var ps = System.Management.Automation.PowerShell.Create())
